@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,8 +46,11 @@ public class TagController {
     }
 
 
-
-
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteTags(@PathVariable UUID id) {
+        tagService.deleteTags(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }
