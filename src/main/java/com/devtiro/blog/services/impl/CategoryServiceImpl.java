@@ -3,6 +3,7 @@ package com.devtiro.blog.services.impl;
 import com.devtiro.blog.entity.Category;
 import com.devtiro.blog.repositories.CategoryRepository;
 import com.devtiro.blog.services.CategoryService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,11 @@ public class CategoryServiceImpl implements CategoryService {
             }
         }
         categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public Category getCategoryById(UUID id) {
+        return categoryRepository.findCategoryById(id).orElseThrow(() -> new EntityNotFoundException("Category id not found"));
     }
 
     @Override
